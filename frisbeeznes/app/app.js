@@ -21,5 +21,5 @@ angular.module('myApp', [
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
 
-	$routeProvider.otherwise({redirectTo: '/startpage'}); //<--- write the page we want to start on
+	$routeProvider.otherwise({redirectTo: '/firstpage'}); //<--- write the page we want to start on
 }]);
