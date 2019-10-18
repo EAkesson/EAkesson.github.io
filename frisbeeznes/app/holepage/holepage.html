@@ -1,0 +1,18 @@
+<div class="menuSpanner">
+	<div class="borderAroundpoint" data-ng-click="animationTypeSelection('slide-left'); goToPage('#!/holes')"></div>
+	<a class="nonclickglyph glyphicon glyphicon-chevron-left col-xs-1"></a>
+	<div class="text col-xs-10" ><span class="holeUppertext">{{courseFileName}}  &nbsp&nbsp Hål: {{hole}}</span></div>
+</div>
+
+<div class="trackCont">
+	<div class="row imgHolder">
+		<span class="col-xs-1"></span>
+		<img class="col-xs-10 bigImg" src={{courseInfo.holes[hole-1].image}} alt="An overview of the track" >
+		<span class="col-xs-1"></span>
+	</div>
+
+	<div class="infoText">
+		<span class="col-xs-10 col-xs-offset-1 holeText"> Längd: {{courseInfo.holes[hole-1].distance}}m</span>
+		<span class="col-xs-10 col-xs-offset-1 holeText"> Par: {{courseInfo.holes[hole-1].par}}</span>
+	</div>
+</div>

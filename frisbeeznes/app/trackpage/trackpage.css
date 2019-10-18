@@ -1,0 +1,77 @@
+/*.topBar {
+    background-color: rgba(255, 255, 255, 0.25);
+    height:75px;
+    border-bottom:1px solid rgba(255, 255, 255, 0.5);
+    padding-top:25px;
+	padding-right: 15px;
+}*/
+
+.trackCont {
+	height: calc(100vh - 75px);
+}
+
+.imgHolder {
+	padding-top: 5vh;
+	max-height: 50vh;
+}
+
+.bigImg{
+	max-height: 45vh;
+}
+
+.infoText {
+	font-size:4vw;
+	height: calc(100vh - 50vh - 75px);
+}
+.menuSpanner .text{
+	font-size: 5.5vw;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 100%;
+}
+
+.trackText {
+	max-height: 30vh;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+
+/*.glyphicon-chevron-left{
+	font-size: 30px;
+}
+
+.glyphicon-chevron-right{
+	font-size: 30px;
+}*/
+
+.topBtntrack {
+	/*top: -7px;
+	font-size: 5vw;*/
+	height: 100%;
+
+	background-color: rgba(0,255,0,0.2)
+	/*#5bc0de;*/
+}
+.lowerBtnDiv{
+	padding-left: 0px;
+}
+
+.lowerBtnDiv a{
+	border: solid 1px black;
+	border-radius: 6px;
+	box-shadow: 2px 2px 1px #101f2d;
+	background-color: rgb(70, 138, 205);
+}
+
+.topBtnDiv{
+	height: 100%;
+}
+
+.infoTextBtn {
+	margin-left: 15px;
+	font-size: 5vw;
+}

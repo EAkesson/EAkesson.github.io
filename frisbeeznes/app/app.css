@@ -1,0 +1,134 @@
+/* app css stylesheet */
+body {
+	padding:0;
+	/*background-color: #FFFFFF;*/
+}
+
+.container-fluid {
+	padding:0;
+	overflow: hidden;
+	position: relative;
+}
+
+/*For all pages*/
+.menuSpanner {
+	/*background-color: rgba(255, 255, 255, 0.25);*/
+	box-shadow: 0px 2px 3px #2a2a2c;
+	background-color: #466582;
+	height:75px;
+	/*border-bottom:1px solid rgba(255, 255, 255, 0.5);*/
+	padding:17px;
+	margin:0 auto;
+}
+
+a{
+	color: #df9a39;!important;
+}
+a:active{
+	color: #df9a39;!important;
+	text-decoration: none;
+}
+a:focus{
+	color: #df9a39;!important;
+	text-decoration: none;
+}
+
+.glyphicon-chevron-up {
+	font-size: 30px;
+}
+
+.glyphicon-chevron-down {
+	font-size: 30px;
+}
+
+.glyphicon-chevron-left{
+	font-size:30px;
+}
+
+.glyphicon-chevron-right{
+	font-size:30px;
+}
+
+.row-no-padding {
+	margin:0;
+}
+
+/* Fucks it up? */
+/*
+.glyphicon-chevron-left::before{
+	position: absolute;
+	left: 0px;
+}
+
+.glyphicon-chevron-right::before{
+	position: absolute;
+	right: 0px;
+}*/
+
+/*Vad är detta*/
+.menu {
+	list-style: none;
+	border-bottom: 0.1em solid black;
+	margin-bottom: 2em;
+	padding: 0 0 0.5em;
+}
+
+.menu:before {
+	content: "[";
+}
+
+.menu:after {
+	content: "]";
+}
+
+.menu > li {
+	display: inline;
+}
+
+.menu > li:before {
+	content: "|";
+	padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+	content: "";
+	padding: 0;
+}
+
+.view-frame{
+	position: absolute;
+	width: 100vw;
+}
+
+.borderAroundpoint{
+	border: solid #375067 2px;
+	border-radius: 6px;
+	width: 40px;
+	height: 40px;
+	left: 26px;
+	top: 14px;
+	position: absolute;
+	box-shadow: 1px 1px 1px #2b2b2b;
+	/*pointer-events: none;*/
+}
+
+.borderAroundpoint:active, .borderAroundpoint:focus{
+	box-shadow: 0px 0px 1px #375067;
+	background-color: #375067;
+}
+
+.text{
+	padding-left: 25px;
+	padding-right: -25px;
+}
+
+.topBtnShadow{
+	border: solid #375067 1px;
+	border-radius: 6px;
+	box-shadow: 2px 2px 1px #2b2b2b;
+}
+
+.nonclickglyph{
+	pointer-events: none;
+}
+

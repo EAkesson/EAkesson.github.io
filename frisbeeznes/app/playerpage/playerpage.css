@@ -1,0 +1,75 @@
+.topBtnStart{
+	background-color:rgba(0,255,0,0.2);
+}
+
+.disabled{
+	background-color: rgba(191,191,191,0.2);
+}
+
+.playerCont {
+	height: calc(100vh - 75px);
+	overflow-y: scroll;
+}
+
+.playerAdd {
+	border-top:1px solid rgba(255, 255, 255, 0.5);
+	height: calc(100vh - 75px - 75vh);
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.addSign{
+	/*top: 50%; Not needed when the sign is right under */
+	left: 50%;
+	padding-top: 5px;
+	transform: translate(-50%,0%);
+	font-size: calc((100vh - 75px - 75vh) * 0.65);
+	color: rgb(75, 134, 75);
+	text-shadow: 2px 2px 2px #101f2d;
+}
+
+.underAddSign{
+	padding-bottom: calc(100vh - 75px - 90px - 45px - calc((100vh - 75px - 75vh) * 0.65));
+}
+
+.playerDiv{
+	/*padding-top:30px;*/
+	height: 90px;
+	border-bottom:1px solid rgba(255, 255, 255, 0.5);
+}
+
+.number{
+	top: 50%;
+	transform: translate(0%,-55%);
+	font-size: 30px;
+}
+
+.menuSpanner .text{
+	font-size: 5.5vw;
+	text-align: center;
+	height: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.menuSpanner .text span{
+	vertical-align: middle;
+}
+
+.nameText{
+	top: 50%;
+	transform: translate(0%,-55%);
+}
+
+.removeOuterDiv{
+	top: 50%;
+	transform: translate(0%,-50%);
+}
+
+.removeInnerDiv{
+	top: 50%;
+	left: 15px;
+	/*transform: translate(-50%,+50%);*/
+	font-size: 30px;
+	color: rgb(185, 66, 66);
+	text-shadow: 2px 2px 2px #101f2d;
+}

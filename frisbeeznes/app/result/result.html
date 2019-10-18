@@ -1,0 +1,26 @@
+<!-- Top menu bar -->
+<div class="row menuSpanner">
+	<div class="borderAroundpoint" data-ng-click="animationTypeSelection('slide-left'); goToPage('#!/scorecard')" ></div>
+	<a class="nonclickglyph glyphicon glyphicon-chevron-left col-xs-2"></a>
+	<span class="col-xs-8 rubrik">Resultat</span>
+	<a data-ng-click="animationTypeSelection('rotate-in')" href="#!/firstpage" id="btn-done" class="col-xs-2 topBtnShadow">Klar</a>
+</div>
+
+<!-- The list displaying the result -->
+<div class="row container">
+	<div class="col-xs-12 winner" ng-if="playersTotal[0]">
+		<div id="winnerL" class="col-xs-2"></div>
+			<div>
+				<div class="col-xs-8">{{playersTotal[0].name}} </div>
+				<div class="col-xs-4 sub">Kast: {{playersTotal[0].score}}</div>
+				<div class="col-xs-4 sub">Par: {{playersTotal[0].par}}</div>
+			</div>
+		<div id="winnerR" class="col-xs-2"></div>
+	</div>
+
+	<div class="col-xs-12 losers" data-ng-repeat="p in playersTotal | startFrom : 1">
+		<div class="col-xs-12">{{p.name}} </div>
+		<div class="col-xs-6 sub">Kast: {{p.score}} </div>
+		<div class="col-xs-6 sub">Par: {{p.par}}</div>
+	</div>
+</div>

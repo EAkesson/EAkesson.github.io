@@ -1,0 +1,41 @@
+/*.topBar {
+    background-color: rgba(255, 255, 255, 0.25);
+    height:75px;
+    border-bottom:1px solid rgba(255, 255, 255, 0.5);
+    padding-top:25px;
+}*/
+.holeUppertext{
+	font-size: 25px;
+}
+
+.trackCont {
+	height: calc(100vh - 75px);
+}
+
+.imgHolder {
+	padding-top: 5vh;
+	max-height: 50vh;
+}
+
+.bigImg{
+	max-height: 45vh;
+}
+
+.infoText {
+	padding-top: 20px;
+	height: calc(100vh - 50vh - 75px);
+}
+.holeText {
+	padding-left: 0px;
+	padding-right: 0px;
+	font-size: 2em;
+}
+
+
+/*.glyphicon-chevron-left{
+	font-size: 30px;
+}*/
+
+.infoTextBtn {
+	margin-left: 15px;
+}

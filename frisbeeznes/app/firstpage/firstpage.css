@@ -1,0 +1,10 @@
+.picture {
+	background-image: url("Frisbee2.png");
+	width: 256px;
+	height: 256px;
+	background-repeat: no-repeat;
+}
+
+.picSpanner {
+	margin: 50% 15%;
+}

@@ -1,0 +1,54 @@
+<!--<div class="row menuSpanner">
+	<div class="row menuTitle">
+		<a data-ng-click="animationTypeSelection('slide-left')" href="#!/playerpage" class="glyphicon glyphicon-chevron-left col-xs-1" style="display:table-cell; vertical-align: middle;"></a>
+		<div class="col-xs-7" style="display:table-cell;vertical-align: middle;">{{courseName}}</div>
+		<a data-ng-click="animationTypeSelection('slide-right')" href="#!/result" class="btn btn-danger col-xs-3" role="button" ng-click="sortByScore()">Avsluta Spel</a>
+	</div>
+</div>-->
+<div class="row menuSpanner">
+	<div class="borderAroundpoint" data-ng-click="animationTypeSelection('slide-left'); goToPage('#!/playerpage')"></div>
+	<a class="nonclickglyph glyphicon glyphicon-chevron-left col-xs-1"></a>
+	<div class="text col-xs-7"><span>{{courseFileName}}</span></div>
+	<div class="col-xs-3 topBtnDiv"><a data-ng-click="animationTypeSelection('slide-right'); sortByScore()" href="#!/result" class="btn btn-danger topBtnScore topBtnShadow" role="button">Avsluta Spel</a></div>
+</div>
+
+<div class="row titleSpanner row-no-padding">
+	<div class="col-xs-2 titleSquare"><div class="squareContent">Hål</div></div>
+
+	<div class="col-xs-2 titleSquare" ng-repeat="f in players" ng-if="$index >= 0">
+		<div class="squareContent">{{f.name.charAt(0)}}</div>
+	</div>
+</div>
+
+<!-- Overflow gradients -->
+<script>
+	var $top = $('<div class="gradient-top"></div>');
+	var $btm = $('<div class="gradient-bottom"></div>');
+	$('.above').append($top);
+	$('.above').append($btm);
+	var $ccol = $('.cardSpanner');
+
+	$ccol.scroll(function()
+	{
+		$top.stop(true,true).fadeTo(250, $ccol.scrollTop() > 10 ? 1 : 0);
+		// $btm.stop(true,true).fadeTo(250, $ccol.scrollTop() < $ccol.height() - 10 ? 1 : 0);
+		$btm.stop(true,true).fadeTo(250, $ccol.scrollTop() + $ccol.innerHeight() < $ccol[0].scrollHeight - 10 ? 1 : 0);
+	});
+</script>
+<div class="above"></div>
+<!-- Overflow gradients END -->
+
+<div class="cardSpanner" data-ng-init="totalScore(); overUnderPar()"> <!-- container for correct padding -->
+	<div class="row row-no-padding" ng-repeat="h in courseInfo.holes" ng-if="$index >= 0" data-ng-click="animationTypeSelection('slide-top'); holeChoice(h.hole - 1); goToPointPage()">
+		<div class="col-xs-2 squareTitle"><div class="squareContent">{{h.hole}}</div></div>
+
+		<div class="playerSquare titleSquare col-xs-2" ng-repeat="p in players" ng-if="$index >= 0">
+			<div class="squareContent">{{p.holes[h.hole-1]}}</div>
+		</div>
+	</div>
+</div>
+
+<div class="row scoreSpanner row-no-padding"> <!-- container for correct padding -->
+	<div class="col-xs-2 square2"><div class="squareContent">Tot</div></div>
+	<div class="col-xs-2 square2" data-ng-repeat="p in players"><div class="squareContent">{{p.score}}</div></div>
+</div>
