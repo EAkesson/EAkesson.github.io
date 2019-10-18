@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<title>Lither Than Air</title>
+
+	<style>
+
+		html, body { margin: 0; padding: 0; overflow: hidden; }
+
+	</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- Include sources here -->
+
+<!--THREE.JS -->
+
+<script src="js/three.js"></script>
+
+<!--Physics-->
+
+<script src="CalcPosition.js"></script>
+
+<script src="CalcForces.js"></script>
+
+<script src="Parameters.js"></script>
+
+<script src="WindField.js"></script>
+
+<!--CAMERA-->
+
+<script src="js/controls/OrbitControls.js"></script>
+
+<script src="js/controls/PointerLockControls.js"></script>
+
+<!--WORLD-->
+
+<script src="loadWorld.js"></script>
+
+<!--KEY-->
+
+<script src="EEkEy.js"></script>
+
+<!--Obj-->
+
+<script src ="js/loaders/OBJLoader.js"></script>
+
+<script src ="js/loaders/MTLLoader.js"></script>
+
+<script src ="js/loaders/DDSLoader.js"></script>
+
+<script src ="js/loaders/TGALoader.js"></script>
+
+<script src ="objectLoad.js"></script>
+
+<script src ="enviLoad.js"></script>
+
+<!--all objects -->
+
+<script src ="Objects.js"></script>
+
+<!--FPS-Stats-->
+
+<script src ="js/stats/build/stats.js"></script>
+
+
+
+
+
+<script src="updateHUD.js"></script>
+
+<!-- Create HUD in a div with a separate three.js -->
+
+<div id="HUD" style= "position: absolute; font-family:Lucida Console; margin-left: 1vw;" >
+
+	<p id="temperature" style="color: ghostwhite"></p>
+
+	<p id="height"  style="color: ghostwhite"></p>
+
+	<p id="balloonspeed"  style="color: ghostwhite"></p>
+
+	<p id="windspeed"  style="color: ghostwhite"></p>
+
+	<p id="fps"  style="color: ghostwhite"></p>
+
+</div>
+
+
+
+<script> // ************** JavaScript **************
+
+//TODO fix so everything loads in right order
+
+//TODO
+
+// Scene variables
+
+var camera, controls, orbit, orbitControls, scene, renderer;
+
+
+
+var havePointLock = 'pointerLockElement' in document;
+
+var cameraPick = 1;
+
+var relativeOrbitPosition = 1;
+
+var deltaTime, now, lastUpdate=Date.now();
+
+var compload = false;
+
+if(havePointLock) {
+
+	var pointerlockchange = function (event) {
+
+		if(document.pointerLockElement === document.body){
+
+			console.log('PointerLock enabled');
+
+			controlsEnabled = true;
+
+			controls.enabled = true;
+
+		} else {
+
+			console.log('PointerLock disabled');
+
+			controls.enabled = false;
+
+		}
+
+	}
+
+}
+
+
+
+var pointerlockerror = function (event) {
+
+	console.log('Error!');
+
+}
+
+var controlsEnabled = false;
+
+
+
+var balloon, earth, skyBox;
+
+var light;
+
+setTimeout( function() {
+
+	initScene();
+
+	loadWorld();
+
+	animate();
+
+}, 1000);
+
+
+
+// Builds camera, camera controls, scene and renderer
+
+function initScene() {
+
+	document.addEventListener('pointerlockchange', pointerlockchange, false);
+
+	document.addEventListener('pointerlockerror', pointerlockerror, false);
+
+
+
+	// Camera 1
+
+	orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+
+	orbit.position.z = 100;
+
+
+
+	// Camera 2
+
+	camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+
+
+	// Scene
+
+	scene = new THREE.Scene();
+
+	scene.background = new THREE.Color(0xF0F8FF);
+
+	scene.fog = new THREE.FogExp2(0x25FCB9, 0.0009);
+
+
+
+	// Renderer
+
+	renderer = new THREE.WebGLRenderer({antialias: true});
+
+	renderer.setSize(window.innerWidth, window.innerHeight);
+
+	renderer.shadowMap.enabled = true;
+
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+	document.body.appendChild(renderer.domElement);
+
+
+
+	// OrbitControls
+
+	orbitControls = new THREE.OrbitControls(orbit, renderer.domElement);
+
+	orbitControls.addEventListener('change', render);
+
+	orbitControls.enableZoom = false;
+
+	orbitControls.enablePan = false;
+
+	//orbitControls.autoRotate = true;
+
+
+
+	// PointerLockControls
+
+	controls = new THREE.PointerLockControls(camera);
+
+	scene.add(controls.getObject());
+
+
+
+	// Add wind arrow
+
+	//scene.add(axesHelper);
+
+	//scene.add(arrowHelper);
+
+	//scene.add( box );
+
+
+
+	document.addEventListener('keydown', onDocumentKeyDown, false);
+
+	document.addEventListener("keyup", onDocumentKeyUp, false);
+
+	window.addEventListener('resize', onWindowResize, false);
+
+	document.addEventListener( 'wheel', onMouseWheel);
+
+}
+
+
+
+
+
+
+
+function onWindowResize() {
+
+	camera.ascpet = orbit.ascpet = window.innerWidth / window.innerHeight;
+
+	camera.updateProjectionMatrix();
+
+	orbit.updateProjectionMatrix();
+
+
+
+	renderer.setSize(window.innerWidth, window.innerHeight);
+
+}
+
+
+
+//var stats = new Stats();
+
+//stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+
+//document.body.appendChild( stats.dom );
+
+
+
+// Put all animations in here instead of in render().
+
+function animate() {
+
+	requestAnimationFrame(animate);
+
+
+
+	if(compload){
+
+		now = Date.now();
+
+		deltaTime = now - lastUpdate;
+
+		lastUpdate = now;
+
+		fps = 1000/(deltaTime);
+
+		steplength = deltaTime/1000;
+
+
+
+		//setTimeout( function() {
+
+
+
+
+
+		// ************** ANIMATIONS **************
+
+		//stats.begin();
+
+		CalcForces();
+
+		//stats.end();
+
+		CalcPosition();
+
+		WindUpdate();
+
+		updateHUD();
+
+
+
+		orbitControls.target.set(balloon.position.x, balloon.position.y, balloon.position.z);
+
+		orbit.position.y = balloon.position.y + relativeOrbitPosition;
+
+		camera.position.x = balloon.position.x;
+
+		camera.position.y = balloon.position.y-8.7;
+
+		camera.position.z = balloon.position.z;
+
+		camera.rotation.x = -.13;
+
+		orbitControls.update();
+
+
+
+		// ************** ANIMATIONS **************
+
+		//}, 1000 / (fps+10) );
+
+		render();
+
+	}
+
+
+
+}
+
+
+
+// KEEP THIS CLEAN.
+
+function render() {
+
+
+
+	// Decides which camera will be used
+
+	if(cameraPick === 1)
+
+		renderer.render(scene, orbit);
+
+	else if(cameraPick === 2)
+
+		renderer.render(scene, camera);
+
+	else
+
+		console.log('Your controls seem to have fucked up');
+
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
